@@ -1,0 +1,188 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: black;
+  }
+  
+  .container {
+    perspective: 1000px;
+  }
+  
+  .form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg);
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    animation: form-animation 0.5s ease-in-out;
+    
+    width: 600px;
+  }
+  
+  @keyframes form-animation {
+    from {
+      transform: rotateX(-30deg);
+      opacity: 0;
+    }
+    to {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+  }
+  
+  h2 {
+    margin: 0 0 20px;
+    text-align: center;
+    color: #0031F2;
+  }
+  
+  .input-container {
+    --c-text: rgb(50, 50, 80);
+    --c-bg: rgb(252, 252, 252);
+    --c-outline: rgb(55, 45, 190);
+    display: grid;
+    gap: 1ch;
+    position: relative;
+    max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+  }
+  
+  .input-field {
+    padding: 1em 1.5em;
+    border-radius: 0.2em;
+    border: 1px solid var(--c-border, currentColor);
+    color: var(--c-text);
+    font-size: 1.2rem;
+    letter-spacing: 0.1ch;
+    width: 100%;
+  }
+  
+  .input-field:not(:placeholder-shown) + .input-label {
+    transform: translateY(-220%);
+    opacity: 1;
+  }
+  
+  .input-field:invalid {
+    --c-border: rgb(230, 85, 60);
+    --c-text: rgb(230, 85, 60);
+    --c-outline: rgb(230, 85, 60);
+  }
+  
+  .input-field:is(:disabled, :read-only) {
+    --c-border: rgb(150, 150, 150);
+    --c-text: rgb(170, 170, 170);
+  }
+  
+  .input-field:is(:focus, :focus-visible) {
+    outline: 2px solid var(--c-outline);
+    outline-offset: 2px;
+  }
+  
+  .input-label {
+    --timing: 200ms ease-in;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transition: transform var(--timing),
+      opacity var(--timing);
+    transform: translateY(-50%);
+    opacity: 0;
+    color: var(--c-text);
+    font-weight: 500;
+  }
+  
+  button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #006DFE;
+    color: #fff;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: rotateX(0deg);
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+  
+  button:hover {
+    background-color: #0031F2;
+    font-size: 1.35rem;
+    transform: scale(1.05) rotateY(10deg);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+  
+  .result {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: rgba(0, 100, 255, 0.1);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.25rem;
+    animation: result-animation 0.5s ease-in-out;
+  }
+  
+  @keyframes result-animation {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .loaderBar {
+    width: 100%;
+    height: 30px;
+    background: #F9F9F9;
+    border-radius: 10px;
+    border: 1px solid #006DFE;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  
+  .loaderBar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 5px;
+    background: repeating-linear-gradient(45deg, #0031F2 0 30px, #006DFE 0 40px) right/200% 100%;
+    animation: fillProgress 0.5s ease-in-out forwards, lightEffect 1s infinite linear;
+  }
+  
+  @keyframes fillProgress {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: var(--progress, 0%);
+    }
+  }
+  
+  @keyframes lightEffect {
+    0%, 20%, 40%, 60%, 80%, 100% {
+      background: repeating-linear-gradient(45deg, #0031F2 0 30px, #006DFE 0 40px) right/200% 100%;
+    }
+    10%, 30%, 50%, 70%, 90% {
+      background: repeating-linear-gradient(45deg, #0031F2 0 30px, #006DFE 0 40px, rgba(255, 255, 255, 0.3) 0 40px) right/200% 100%;
+    }
+  }
